@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AlgoModule } from './algo/algo.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   //Dentro de este import deben estar todos los modulos
-  imports: [AlgoModule,
+  imports: [ ,
     TypeOrmModule.forRoot({
       type:'postgres',
       host:'localhost',
