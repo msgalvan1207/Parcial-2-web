@@ -19,4 +19,9 @@ export class AlgoController {
     // cuando se llama a algo const algo: AlgoEntity = plainToInstance(AlgoEntity, algoDto)
 
     //para el delete, incluir @HttpCode(204)
+
+    @Get()
+    test() {
+        return "Algo funciona"
+    }
 }
