@@ -7,11 +7,14 @@ export class AlbumDto {
     readonly nombre: string;
 
     @IsUrl()
-    @IsNotEmpty()
     readonly caratula: string;
 
     @IsNotEmpty()
     @IsDate()
     readonly fechaLanzamiento: Date;
+
+    @IsString()
+    readonly desc: string;
+
 
 }
