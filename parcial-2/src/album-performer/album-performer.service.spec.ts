@@ -74,8 +74,9 @@ describe('AlbumPerformerService', () => {
       performers: [],
     });
 
-    await service.addPerformerToAlbum(album.id, performer.id);
-    const albumWithPerformer: AlbumEntity = await albumRepository.findOne({where: {id: album.id}, relations: ['performers']});
+    const albumWithPerformer: AlbumEntity = await service.addPerformerToAlbum(album.id, performer.id);
+    
+    expect(albumWithPerformer).not.toBeNull();
 
     expect(albumWithPerformer.performers.length).toEqual(1);
     expect(albumWithPerformer.performers[0]).not.toBeNull();

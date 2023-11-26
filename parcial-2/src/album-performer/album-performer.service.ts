@@ -15,7 +15,7 @@ export class AlbumPerformerService {
         private readonly performerRepository: Repository<PerformerEntity>
     ){}
 
-    async addPerformerToAlbum(albumId:string, performerId:string)
+    async addPerformerToAlbum(albumId:string, performerId:string): Promise<AlbumEntity>
     {
         const album: AlbumEntity = await this.albumRepository.findOne({where:{id:albumId}, relations:['tracks','performers']})
         if (!album)
@@ -37,7 +37,7 @@ export class AlbumPerformerService {
 
         performer.albums.push(album)
 
-        await this.albumRepository.save(album)
         await this.performerRepository.save(performer)
+        return await this.albumRepository.save(album)
     }
 }
