@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "b01e437b-a1e8-461d-b954-8c07ca83aa75",
+		"name": "Colección album-performance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23454697"
+	},
+	"item": [
+		{
+			"name": "album-performance",
+			"item": [
+				{
+					"name": "addPerformerToAlbum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()\r",
+									"pm.globals.set(\"performer_id\", data.id);\r",
+									"\r",
+									"pm.test(\"status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/album/{{album_id}}/performer/{{performer_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"{{album_id}}",
+								"performer",
+								"{{performer_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addPerformerToAlbum no album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function() {\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"album not found or does not exist\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/album/daff7c10-6585-4beb-ae81-d3fb45ea2d79/performer/{{performer_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"daff7c10-6585-4beb-ae81-d3fb45ea2d79",
+								"performer",
+								"{{performer_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addPerformerToAlbum no performer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function() {\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"performer not found or does not exist\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/album/{{album_id}}/performer/daff7c10-6585-4beb-ae81-d3fb45ea2d79",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"{{album_id}}",
+								"performer",
+								"daff7c10-6585-4beb-ae81-d3fb45ea2d79"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}

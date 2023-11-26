@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "072faf9e-2b73-45ab-aafc-cc36ad75de17",
+		"name": "Colección tracks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23454697"
+	},
+	"item": [
+		{
+			"name": "performers",
+			"item": [
+				{
+					"name": "create performer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()\r",
+									"pm.globals.set(\"performer_id\", data.id);\r",
+									"\r",
+									"pm.test(\"status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"amogus impostor\",\r\n    \"imagen\":\"https://i1.sndcdn.com/artworks-Uii8SMJvNPxy8ePA-romBoQ-t500x500.jpg\",\r\n    \"desc\": \"This pic goes hard. Feel free to screenshot\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/performer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"performer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create performer error descripcion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code is 412\", function () {\r",
+									"    pm.response.to.have.status(412);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function() {\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"performer description too long\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"amogus impostor\",\r\n    \"imagen\":\"https://i1.sndcdn.com/artworks-Uii8SMJvNPxy8ePA-romBoQ-t500x500.jpg\",\r\n    \"desc\": \"00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/performer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"performer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All performers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('number of algo > ' + 0, function() {\r",
+									"    var data = pm.response.json()\r",
+									"    pm.expect(data.length).to.greaterThan(0)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/performer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"performer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one performer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code is 200\", function() {\r",
+									"    pm.response.to.have.status(200)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/performer/{{performer_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"performer",
+								"{{performer_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one performer que no exister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code is 404\", function() {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function() {\r",
+									"    var data = pm.response.json();\r",
+									"    pm.expect(data.message).to.eql(\"performer not found\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/performer/4df95311-ea23-4ead-a1ce-74bca1dfcad2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"performer",
+								"4df95311-ea23-4ead-a1ce-74bca1dfcad2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}
