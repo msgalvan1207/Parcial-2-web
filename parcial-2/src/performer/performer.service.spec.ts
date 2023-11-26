@@ -79,7 +79,7 @@ describe('PerformerService', () => {
     performer.desc = faker.lorem.words(101);
     performer.albums = [];
 
-    await expect(service.create(performer)).rejects.toHaveProperty('message', 'performer descriptio too long');
+    await expect(service.create(performer)).rejects.toHaveProperty('message', 'performer description too long');
   });
   
 });

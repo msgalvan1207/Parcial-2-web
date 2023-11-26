@@ -28,9 +28,9 @@ export class PerformerService {
 
     async create(perf: PerformerEntity): Promise<PerformerEntity>
     {
-        if(perf.desc.length >= 100)
+        if(perf.desc.length > 100)
         {
-            throw new BusinessLogicException('performer descriptio too long', BusinessError.PRECONDITION_FAILED)
+            throw new BusinessLogicException('performer description too long', BusinessError.PRECONDITION_FAILED)
         }
 
         return await this.repository.save(perf)

@@ -47,9 +47,9 @@ export class TrackService {
 
         const newTrack : TrackEntity = await this.trackRepository.save(track)
 
-        album.tracks.push(newTrack)
+        //album.tracks.push(newTrack)
 
-        await this.albumRepository.save(album)
+        //await this.albumRepository.save(album)
         
         return newTrack
     }

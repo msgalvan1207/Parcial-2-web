@@ -35,9 +35,9 @@ export class AlbumPerformerService {
 
         album.performers.push(performer)
 
-        performer.albums.push(album)
+        //performer.albums.push(album)
 
-        await this.performerRepository.save(performer)
+        //await this.performerRepository.save(performer)
         return await this.albumRepository.save(album)
     }
 }
