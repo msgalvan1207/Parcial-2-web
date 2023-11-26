@@ -21,7 +21,7 @@ export class AlbumService {
         const album: AlbumEntity = await this.repository.findOne({where:{id}, relations:['tracks','performers']})
         if(!album)
         {
-            throw new BusinessLogicException("album not found or doest exist", BusinessError.NOT_FOUND )
+            throw new BusinessLogicException("album not found or does not exist", BusinessError.NOT_FOUND )
         }
         return album
     }
@@ -45,7 +45,7 @@ export class AlbumService {
         const album: AlbumEntity = await this.repository.findOne({where:{id}, relations:['tracks','performers']})
         if(!album)
         {
-            throw new BusinessLogicException("album not found or doest exist", BusinessError.NOT_FOUND )
+            throw new BusinessLogicException("album not found or does not exist", BusinessError.NOT_FOUND )
         }
 
         if(album.tracks.length!==0)
