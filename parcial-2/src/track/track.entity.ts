@@ -8,6 +8,9 @@ export class TrackEntity {
     id: string;
 
     @Column()
+    nombre: string;
+
+    @Column()
     duracion: number;
 
     @ManyToOne(()=>AlbumEntity, album=>album.tracks)
