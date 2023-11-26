@@ -13,7 +13,7 @@ export const TypeOrmTestingConfig = () => [
         //lista de entidades que se utilizan en las pruebas
         entities: [AlbumEntity, TrackEntity, PerformerEntity],
         synchronize: true,
-        keepConnectionAlive: true
+        keepConnectionAlive: true,
     }),
     //again, poner en la lista todas las entidades
     TypeOrmModule.forFeature([AlbumEntity, TrackEntity, PerformerEntity])

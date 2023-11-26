@@ -35,7 +35,7 @@ export class TrackService {
         const album: AlbumEntity = await this.albumRepository.findOne({where:{id:albumId}, relations:['performers','tracks']})
         if(!album)
         {
-            throw new BusinessLogicException("album not found or doest exist", BusinessError.NOT_FOUND )
+            throw new BusinessLogicException("album not found or does not exist", BusinessError.NOT_FOUND )
         }
 
         if(!track.duracion || track.duracion <0)
@@ -43,7 +43,9 @@ export class TrackService {
             throw new BusinessLogicException("track duration must be a positive number", BusinessError.PRECONDITION_FAILED)
         }
 
-        const newTrack : TrackEntity = await this.trackRepository.save(album)
+        track.album = album
+
+        const newTrack : TrackEntity = await this.trackRepository.save(track)
 
         album.tracks.push(newTrack)
 

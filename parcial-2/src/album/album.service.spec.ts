@@ -123,7 +123,7 @@ describe('AlbumService', () => {
 
   it('should throw an exception when album has tracks', async () => {
     await trackRepository.save({
-      nombre: faker.music.genre(),
+      nombre: faker.music.songName(),
       duracion: faker.number.int(),
       album: albums[0]
     })
